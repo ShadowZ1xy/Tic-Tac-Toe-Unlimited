@@ -8,14 +8,14 @@ public class FieldDisplay {
             if (i < 10) {
                 System.out.print(" " + i + "  ");
             } else {
-                System.out.print(" "+ i + " ");
+                System.out.print(" " + i + " ");
             }
         }
         System.out.println();
         for (int row = 0; row < field.length; row++) {
-            System.out.print((char)(row+97)+" ");
+            System.out.print((char) (row + 97) + " ");
             for (int element = 0; element < field.length; element++) {
-                System.out.print(" | "+field[row][element]);
+                System.out.print(" | " + field[row][element]);
             }
             System.out.print(" |");
             System.out.println();

@@ -1,6 +1,27 @@
 package com.company.brain;
 
+import com.company.field.Field;
+
 public class Observer {
+    public static int[][] emptySpots(char[][] field) {
+        int[][] temp = new int[field.length * field.length][];
+        int counter = 0;
+        for (int row = 0; row < field.length; row++) {
+            for (int element = 0; element < field.length; element++) {
+                if (field[row][element] == ' ') {
+                    temp[counter++] = new int[]{row, element};
+                }
+            }
+        }
+        if (counter > 0) {
+            int[][] result = new int[counter][];
+            System.arraycopy(temp, 0, result, 0, counter);
+            return result;
+        } else {
+            return new int[][]{{-1, -1}};
+        }
+    }
+
     private static char checkLine(char[][] field) {
         for (char[] line : field) {
             char control = line[0];
@@ -74,6 +95,27 @@ public class Observer {
         if (row != ' ') {
             return row;
         }
-        return checkDiagonal(field);
+        char diagonal = checkDiagonal(field);
+        if (diagonal != ' ') {
+            return diagonal;
+        }
+        for (char[] part : field) {
+            for (char el : part) {
+                if (el == ' ') {
+                    return ' ';
+                }
+            }
+        }
+        return '?';
+    }
+
+    static boolean checkCoordinatesFree(int[] coordinates) {
+        int[][] freeSpots = Observer.emptySpots(Field.getMainField());
+        for (int[] part : freeSpots) {
+            if (coordinates[0] == part[0] && coordinates[1] == part[1]) {
+                return true;
+            }
+        }
+        return false;
     }
 }

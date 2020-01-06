@@ -1,22 +1,38 @@
 package com.company;
 
 import com.company.UI.FieldDisplay;
-import com.company.brain.Observer;
+import com.company.brain.AI.Computer;
 import com.company.brain.Controller;
+import com.company.brain.Observer;
 import com.company.field.Field;
-import com.company.players.Human;
+import com.company.players.Player;
 
-public class Init {
-    public static void start() {
-        /*System.out.println(Arrays.toString(PlayerChoice.convertCoordinate("c15")));*/
-        Human human = new Human();
-        //human.move(new int[]{0, 0}, Field.getMainField());
+class Init {
+    static void start() {
+        Player human = new Player();
+        Player bot = new Player();
         human.setFigure('X');
+        bot.setFigure('O');
         Field.init(3);
-        FieldDisplay.show(Field.getMainField());
-        Controller.playerMove(human, Field.getMainField());
-        FieldDisplay.show(Field.getMainField());
-        System.out.println();
-        System.out.println(Observer.checkAll(Field.getMainField()));
+        while (true) {
+            FieldDisplay.show(Field.getMainField());
+            Controller.playerMove(human, Field.getMainField());
+            FieldDisplay.show(Field.getMainField());
+            if (Observer.checkAll(Field.getMainField()) != ' ') {
+                break;
+            }
+
+            bot.move(Computer.bestMove(
+                    Field.getMainField(),
+                    bot.getFigure(),
+                    human.getFigure()),
+                    Field.getMainField()
+            );
+            FieldDisplay.show(Field.getMainField());
+            if (Observer.checkAll(Field.getMainField()) != ' ') {
+                break;
+            }
+
+        }
     }
 }

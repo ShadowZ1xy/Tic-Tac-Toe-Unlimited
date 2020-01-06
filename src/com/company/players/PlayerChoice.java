@@ -1,9 +1,9 @@
-package com.company;
+package com.company.players;
 
 import java.util.Scanner;
 
 public class PlayerChoice {
-    static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static int[] convertCoordinate(String choice) {
         int row = choice.charAt(0) - 97;
