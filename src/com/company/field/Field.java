@@ -13,11 +13,9 @@ public class Field {
         }
     }
 
-    //region GettersAndSetters
 
     public static char[][] getMainField() {
         return mainField;
     }
 
-    //endregion
 }

@@ -4,7 +4,7 @@ import com.company.brain.Observer;
 
 public class Computer {
     public static int[] bestMove(char[][] field, char ai, char human) {
-        int bestScore = (int) Double.NEGATIVE_INFINITY;
+        int bestScore = Integer.MIN_VALUE;
         int[] move = new int[0];
         int[][] emptySpots = Observer.emptySpots(field);
         for (int[] part : emptySpots) {
@@ -12,8 +12,8 @@ public class Computer {
             int score = miniMax(
                     field, false,
                     ai, human,
-                    (int) Double.NEGATIVE_INFINITY,
-                    (int) Double.POSITIVE_INFINITY
+                    Integer.MIN_VALUE,
+                    Integer.MAX_VALUE
             );
             field[part[0]][part[1]] = ' ';
             if (score > bestScore) {
@@ -40,7 +40,7 @@ public class Computer {
         int bestScore;
         int[][] emptySpots = Observer.emptySpots(field);
         if (isMax) {
-            bestScore = (int) Double.NEGATIVE_INFINITY;
+            bestScore = Integer.MIN_VALUE;
             for (int[] part : emptySpots) {
                 field[part[0]][part[1]] = ai;
                 int score = miniMax(field, false, ai, human, alpha, beta);
@@ -53,7 +53,7 @@ public class Computer {
             }
             return bestScore;
         } else {
-            bestScore = (int) Double.POSITIVE_INFINITY;
+            bestScore = Integer.MAX_VALUE;
             for (int[] part : emptySpots) {
                 field[part[0]][part[1]] = human;
                 int score = miniMax(field, true, ai, human, alpha, beta);
